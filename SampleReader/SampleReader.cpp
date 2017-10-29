@@ -68,9 +68,9 @@ RTC::ReturnCode_t SampleReader::onExecute(RTC::UniqueId ec_id)
 {
     daq_do();
 
-    // if (error_flag == true) {
-    //     daq_errored();
-    // }
+    if (error_flag == true) {
+        daq_errored();
+    }
 
     return RTC::RTC_OK;
 }
@@ -205,6 +205,7 @@ int SampleReader::daq_errored()
 
     std::cerr << "*** SampleReader::To Operator=>Reboot request" << std::endl;
     fatal_error_report(REBOOT, "REBOOT");
+    error_flag = false;
     return 0;
 }
 

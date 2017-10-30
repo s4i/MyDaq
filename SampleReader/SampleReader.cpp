@@ -13,7 +13,6 @@ using DAQMW::FatalType::DATAPATH_DISCONNECTED;
 using DAQMW::FatalType::OUTPORT_ERROR;
 using DAQMW::FatalType::USER_DEFINED_ERROR1;
 using DAQMW::FatalType::USER_DEFINED_ERROR2;
-using DAQMW::FatalType::REBOOT;
 
 // Module specification
 // Change following items to suit your component's spec.
@@ -38,7 +37,6 @@ SampleReader::SampleReader(RTC::Manager* manager)
       m_sock(0),
       m_recv_byte_size(0),
       m_out_status(BUF_SUCCESS),
-
       m_debug(false)
 {
     // Registration: InPort/OutPort/Service
@@ -200,11 +198,10 @@ int SampleReader::daq_resume()
 int SampleReader::daq_errored()
 {
     std::cerr << "*** SampleReader::errored" << std::endl;
-
-    sleep(10);
-
+    sleep(5);
     std::cerr << "*** SampleReader::To Operator=>Reboot request" << std::endl;
-    fatal_error_report(REBOOT, "REBOOT");
+    set_status(COMP_FIXWAIT);
+    sleep(2);
     error_flag = false;
     return 0;
 }

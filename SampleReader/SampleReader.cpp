@@ -70,7 +70,6 @@ RTC::ReturnCode_t SampleReader::onExecute(RTC::UniqueId ec_id)
         daq_errored();
     }
 
-
     return RTC::RTC_OK;
 }
 
@@ -200,9 +199,9 @@ int SampleReader::daq_errored()
 {
     std::cerr << "*** SampleReader::errored" << std::endl;
 
-    /* reading */
+    /* Recovery identification */
 
-    std::cerr << "*** To Operator => Reboot request" << std::endl;
+    std::cerr << "*** Reboot request => To Operator" << std::endl;
     error_flag = false;
     return 0;
 }

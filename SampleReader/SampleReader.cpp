@@ -70,6 +70,7 @@ RTC::ReturnCode_t SampleReader::onExecute(RTC::UniqueId ec_id)
         daq_errored();
     }
 
+
     return RTC::RTC_OK;
 }
 
@@ -198,10 +199,10 @@ int SampleReader::daq_resume()
 int SampleReader::daq_errored()
 {
     std::cerr << "*** SampleReader::errored" << std::endl;
-    sleep(5);
-    std::cerr << "*** SampleReader::To Operator=>Reboot request" << std::endl;
-    set_status(COMP_FIXWAIT);
-    sleep(2);
+
+    /* reading */
+
+    std::cerr << "*** To Operator => Reboot request" << std::endl;
     error_flag = false;
     return 0;
 }
@@ -215,8 +216,8 @@ int SampleReader::read_data_from_detectors()
     int status = m_sock->readAll(m_data, SEND_BUFFER_SIZE);
     if (status == DAQMW::Sock::ERROR_FATAL) {
         std::cerr << "### ERROR: m_sock->readAll" << std::endl;
-        error_flag = true;
         fatal_error_report(USER_DEFINED_ERROR1, "SOCKET FATAL ERROR");
+        error_flag = true;
     }
     else if (status == DAQMW::Sock::ERROR_TIMEOUT) {
         std::cerr << "### Timeout: m_sock->readAll" << std::endl;

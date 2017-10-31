@@ -63,6 +63,7 @@ private:
     int m_srcPort;                        /// Port No. of data server
     std::string m_srcAddr;                /// IP addr. of data server
 
+    bool error_flag;
     bool m_debug;
 };
 

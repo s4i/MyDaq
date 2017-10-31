@@ -13,7 +13,6 @@ using DAQMW::FatalType::DATAPATH_DISCONNECTED;
 using DAQMW::FatalType::OUTPORT_ERROR;
 using DAQMW::FatalType::USER_DEFINED_ERROR1;
 using DAQMW::FatalType::USER_DEFINED_ERROR2;
-using DAQMW::FatalType::REBOOT;
 
 // Module specification
 // Change following items to suit your component's spec.
@@ -38,7 +37,6 @@ SampleReader3::SampleReader3(RTC::Manager* manager)
       m_sock(0),
       m_recv_byte_size(0),
       m_out_status(BUF_SUCCESS),
-
       m_debug(false)
 {
     // Registration: InPort/OutPort/Service
@@ -67,6 +65,11 @@ RTC::ReturnCode_t SampleReader3::onInitialize()
 RTC::ReturnCode_t SampleReader3::onExecute(RTC::UniqueId ec_id)
 {
     daq_do();
+
+    if (error_flag == true) {
+        daq_errored();
+    }
+
 
     return RTC::RTC_OK;
 }
@@ -195,22 +198,9 @@ int SampleReader3::daq_resume()
 
 int SampleReader3::daq_errored()
 {
-    while (1)
-    {
-        int status = m_sock->readAll(m_data, SEND_BUFFER_SIZE);
-        if (status == DAQMW::Sock::ERROR_FATAL) {
-            std::cerr << "### ERROR: m_sock->readAll" << std::endl;
-        }
-        else if (status == DAQMW::Sock::ERROR_TIMEOUT) {
-            std::cerr << "### Timeout: m_sock->readAll" << std::endl;
-        }
-        else 
-        {
-            break;
-        }
-        sleep(2);
-    }
-    reboot_request(REBOOT, "REBOOT");
+    std::cerr << "*** SampleReader3::errored" << std::endl;
+    std::cerr << "*** To Operator => Reboot request" << std::endl;
+    error_flag = false;
     return 0;
 }
 
@@ -224,6 +214,7 @@ int SampleReader3::read_data_from_detectors()
     if (status == DAQMW::Sock::ERROR_FATAL) {
         std::cerr << "### ERROR: m_sock->readAll" << std::endl;
         fatal_error_report(USER_DEFINED_ERROR1, "SOCKET FATAL ERROR");
+        error_flag = true;
     }
     else if (status == DAQMW::Sock::ERROR_TIMEOUT) {
         std::cerr << "### Timeout: m_sock->readAll" << std::endl;

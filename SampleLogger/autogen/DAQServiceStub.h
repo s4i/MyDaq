@@ -5,7 +5,7 @@
  *
  * @file DAQServiceStub.h 
  * @brief DAQService client stub header wrapper code
- * @date Mon Oct 30 00:46:49 2017 
+ * @date Wed Nov  1 16:55:42 2017 
  *
  */
 

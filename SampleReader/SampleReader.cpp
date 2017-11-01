@@ -78,6 +78,11 @@ int SampleReader::daq_dummy()
     return 0;
 }
 
+int SampleReader::daq_errored()
+{
+    return 0;
+}
+
 int SampleReader::daq_configure()
 {
     std::cerr << "*** SampleReader::configure" << std::endl;
@@ -195,7 +200,7 @@ int SampleReader::daq_resume()
     return 0;
 }
 
-int SampleReader::daq_errored()
+int SampleReader::daq_reboot()
 {
     std::cerr << "*** SampleReader::errored" << std::endl;
 

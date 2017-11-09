@@ -246,11 +246,7 @@ int Merger::daq_resume()
     return 0;
 }
 
-<<<<<<< HEAD
 int Merger::daq_restart()
-=======
-int Merger::daq_reboot()
->>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
 {
     std::cerr << "*** Merger::reboot" << std::endl;
 

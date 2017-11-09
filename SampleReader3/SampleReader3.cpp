@@ -200,7 +200,6 @@ int SampleReader3::daq_resume()
     return 0;
 }
 
-<<<<<<< HEAD
 int SampleReader3::daq_restart()
 {
     std::cerr << "*** SampleReader3::restart" << std::endl;
@@ -223,15 +222,6 @@ int SampleReader3::daq_restart()
     /* Recovery identification end */
     std::cerr << "*** Reboot request => To Operator" << std::endl;
     // error_flag = false;
-=======
-int SampleReader3::daq_reboot()
-{
-    std::cerr << "*** SampleReader3::errored" << std::endl;
-    
-    
-    std::cerr << "*** To Operator => Reboot request" << std::endl;
-    error_flag = false;
->>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
     return 0;
 }
 

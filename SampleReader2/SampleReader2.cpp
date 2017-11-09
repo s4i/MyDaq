@@ -200,11 +200,7 @@ int SampleReader2::daq_resume()
     return 0;
 }
 
-<<<<<<< HEAD
 int SampleReader2::daq_restart()
-=======
-int SampleReader2::daq_reboot()
->>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
 {
     std::cerr << "*** SampleReader2::restart" << std::endl;
 

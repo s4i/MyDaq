@@ -56,12 +56,7 @@ private:
     int daq_stop();
     int daq_pause();
     int daq_resume();
-<<<<<<< HEAD
     int daq_restart();
-=======
-    int daq_reboot();
-    
->>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
     int parse_params(::NVList* list);
     int reset_InPort();
     unsigned int read_InPort(int PortNum);

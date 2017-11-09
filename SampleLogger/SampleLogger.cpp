@@ -253,11 +253,7 @@ int SampleLogger::daq_resume()
     return 0;
 }
 
-<<<<<<< HEAD
 int SampleLogger::daq_restart()
-=======
-int SampleLogger::daq_reboot()
->>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
 {
     std::cerr << "*** SampleLogger::reboot" << std::endl;
     return 0;

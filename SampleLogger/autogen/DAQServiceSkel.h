@@ -5,7 +5,11 @@
  *
  * @file DAQServiceSkel.h 
  * @brief DAQService server skeleton header wrapper code
- * @date Mon Oct 30 00:46:49 2017 
+<<<<<<< HEAD
+ * @date Wed Nov  8 02:43:03 2017 
+=======
+ * @date Wed Nov  1 16:55:42 2017 
+>>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
  *
  */
 

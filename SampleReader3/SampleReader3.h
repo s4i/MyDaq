@@ -37,6 +37,7 @@ private:
 
 private:
     int daq_dummy();
+    int daq_errored();
     int daq_configure();
     int daq_unconfigure();
     int daq_start();
@@ -44,7 +45,11 @@ private:
     int daq_stop();
     int daq_pause();
     int daq_resume();
-    int daq_errored();
+<<<<<<< HEAD
+    int daq_restart();
+=======
+    int daq_reboot();
+>>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
 
     int parse_params(::NVList* list);
     int read_data_from_detectors();

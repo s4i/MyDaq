@@ -67,14 +67,18 @@ RTC::ReturnCode_t SampleReader2::onExecute(RTC::UniqueId ec_id)
     daq_do();
 
     if (error_flag == true) {
-        daq_errored();
+        daq_restart();
     }
-
 
     return RTC::RTC_OK;
 }
 
 int SampleReader2::daq_dummy()
+{
+    return 0;
+}
+
+int SampleReader2::daq_errored()
 {
     return 0;
 }
@@ -196,11 +200,32 @@ int SampleReader2::daq_resume()
     return 0;
 }
 
-int SampleReader2::daq_errored()
+<<<<<<< HEAD
+int SampleReader2::daq_restart()
+=======
+int SampleReader2::daq_reboot()
+>>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
 {
-    std::cerr << "*** SampleReader2::errored" << std::endl;
-    std::cerr << "*** To Operator => Reboot request" << std::endl;
-    error_flag = false;
+    std::cerr << "*** SampleReader2::restart" << std::endl;
+
+    /* Recovery identification start */
+    // do {
+    //     if (m_sock) {
+    //         m_sock->disconnect();
+    //         delete m_sock;
+    //         m_sock = 0;
+    //         std::cerr << "*** Disconnect socket" << std::endl;
+    //     }
+
+    //     // Create socket and connect to data server.
+    //     m_sock = new DAQMW::Sock();
+    //     m_sock->connect(m_srcAddr, m_srcPort);
+    // } while (m_sock == 0); // 0:Success(Sock.h)
+    // std::cerr << "*** Create socket success" << std::endl;
+    
+    /* Recovery identification end */
+    std::cerr << "*** Reboot request => To Operator" << std::endl;
+    // error_flag = false;
     return 0;
 }
 

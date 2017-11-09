@@ -5,7 +5,11 @@
  *
  * @file DAQServiceSkel.cpp 
  * @brief DAQService server skeleton wrapper
- * @date Tue Oct 31 18:16:11 2017 
+<<<<<<< HEAD
+ * @date Wed Nov  8 02:46:04 2017 
+=======
+ * @date Wed Nov  1 12:03:55 2017 
+>>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
  *
  */
 

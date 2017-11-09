@@ -77,6 +77,11 @@ int SampleLogger::daq_dummy()
     return 0;
 }
 
+int SampleLogger::daq_errored()
+{
+    return 0;
+}
+
 int SampleLogger::daq_configure()
 {
     std::cerr << "*** SampleLoggqer::configure" << std::endl;
@@ -248,9 +253,13 @@ int SampleLogger::daq_resume()
     return 0;
 }
 
-int SampleLogger::daq_errored()
+<<<<<<< HEAD
+int SampleLogger::daq_restart()
+=======
+int SampleLogger::daq_reboot()
+>>>>>>> 5ba1018078814e0d7ab6e6279abdeffed5dca237
 {
-    std::cerr << "*** SampleLogger::errored" << std::endl;
+    std::cerr << "*** SampleLogger::reboot" << std::endl;
     return 0;
 }
 

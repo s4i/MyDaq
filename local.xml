@@ -27,7 +27,7 @@
                     </outPorts>
                     <params>
                         <param pid="srcAddr">127.0.0.1</param>
-                        <param pid="srcPort">2222</param>
+                        <param pid="srcPort">2220</param>
                     </params>
                 </component>
                 <component cid="SampleReader20">
@@ -44,7 +44,7 @@
                     </outPorts>
                     <params>
                         <param pid="srcAddr">127.0.0.1</param>
-                        <param pid="srcPort">2222</param>
+                        <param pid="srcPort">2220</param>
                     </params>
                 </component>
                 <component cid="SampleReader30">

@@ -3,14 +3,14 @@
  *
  * THIS FILE IS GENERATED AUTOMATICALLY!! DO NOT EDIT!!
  *
- * @file DAQServiceStub.h 
- * @brief DAQService client stub header wrapper code
- * @date Tue Nov 14 01:15:32 2017 
+ * @file DAQServiceSkel.h 
+ * @brief DAQService server skeleton header wrapper code
+ * @date Tue Nov 14 01:17:05 2017 
  *
  */
 
-#ifndef DAQSERVICESTUB_H
-#define DAQSERVICESTUB_H
+#ifndef DAQSERVICESKEL_H
+#define DAQSERVICESKEL_H
 
 
 
@@ -23,6 +23,7 @@
 
 #if   defined ORB_IS_TAO
 #  include "DAQServiceC.h"
+#  include "DAQServiceS.h"
 #elif defined ORB_IS_OMNIORB
 #  if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
 #    undef USE_stub_in_nt_dll
@@ -31,9 +32,10 @@
 #elif defined ORB_IS_MICO
 #  include "DAQService.h"
 #elif defined ORB_IS_ORBIT2
-#  include "DAQService-cpp-stubs.h"
+#  include "/DAQService-cpp-stubs.h"
+#  include "/DAQService-cpp-skels.h"
 #else
 #  error "NO ORB defined"
 #endif
 
-#endif // DAQSERVICESTUB_H
+#endif // DAQSERVICESKEL_H

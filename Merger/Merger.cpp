@@ -84,9 +84,6 @@ Merger::~Merger()
 
 }
 
-
-
-
 RTC::ReturnCode_t Merger::onInitialize()
 {
     if (m_debug) {
@@ -107,11 +104,6 @@ RTC::ReturnCode_t Merger::onExecute(RTC::UniqueId ec_id)
  * @brief LOADED, CONFIGURED, PAUSED状態の時に、繰り返し実行.特に何もしない
  */
 int Merger::daq_dummy()
-{
-    return 0;
-}
-
-int Merger::daq_errored()
 {
     return 0;
 }
@@ -253,6 +245,11 @@ int Merger::daq_restart()
     return 0;
 }
 
+int Merger::daq_suspend()
+{
+    return 0;
+}
+
 /**
  * @brief インポートに格納されたデータを読み込む
  */
@@ -265,12 +262,8 @@ int Merger::reset_InPort()
         }
     }
 
-
     return 0;
 }
-
-
-
 
 /**
  * @brief 一つのインポートからデータ読み込みを行う

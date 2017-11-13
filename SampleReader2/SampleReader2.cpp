@@ -78,11 +78,6 @@ int SampleReader2::daq_dummy()
     return 0;
 }
 
-int SampleReader2::daq_errored()
-{
-    return 0;
-}
-
 int SampleReader2::daq_configure()
 {
     std::cerr << "*** SampleReader2::configure" << std::endl;
@@ -222,6 +217,11 @@ int SampleReader2::daq_restart()
     /* Recovery identification end */
     std::cerr << "*** Reboot request => To Operator" << std::endl;
     // error_flag = false;
+    return 0;
+}
+
+int SampleReader2::daq_suspend()
+{
     return 0;
 }
 

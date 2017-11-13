@@ -3,28 +3,25 @@
  *
  * THIS FILE IS GENERATED AUTOMATICALLY!! DO NOT EDIT!!
  *
- * @file DAQServiceSkel.cpp 
- * @brief DAQService server skeleton wrapper
- * @date Tue Nov 14 01:15:32 2017 
+ * @file DAQServiceStub.cpp 
+ * @brief DAQService client stub wrapper code
+ * @date Tue Nov 14 01:15:09 2017 
  *
  */
 
-#include "DAQServiceSkel.h"
+#include "DAQServiceStub.h"
 
-#if defined ORB_IS_TAO
+#if   defined ORB_IS_TAO
 #  include "DAQServiceC.cpp"
-#  include "DAQServiceS.cpp"
 #elif defined ORB_IS_OMNIORB
 #  include "DAQServiceSK.cc"
 #  include "DAQServiceDynSK.cc"
 #elif defined ORB_IS_MICO
 #  include "DAQService.cc"
-#  include "DAQService_skel.cc"
 #elif defined ORB_IS_ORBIT2
 #  include "DAQService-cpp-stubs.cc"
-#  include "DAQService-cpp-skels.cc"
 #else
 #  error "NO ORB defined"
 #endif
 
-// end of DAQServiceSkel.cpp
+// end of DAQServiceStub.cpp

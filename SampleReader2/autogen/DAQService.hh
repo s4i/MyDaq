@@ -198,7 +198,7 @@ typedef DAQLifeCycleState& DAQLifeCycleState_out;
 
 _CORBA_GLOBAL_VAR _dyn_attr const ::CORBA::TypeCode_ptr _tc_DAQLifeCycleState;
 
-enum DAQCommand { CMD_CONFIGURE, CMD_START, CMD_STOP, CMD_UNCONFIGURE, CMD_PAUSE, CMD_RESUME, CMD_ERRORED, CMD_RUNNINGBACK, CMD_NOP /*, __max_DAQCommand=0xffffffff */ };
+enum DAQCommand { CMD_CONFIGURE, CMD_START, CMD_STOP, CMD_UNCONFIGURE, CMD_PAUSE, CMD_RESUME, CMD_ERRORED, CMD_NOP /*, __max_DAQCommand=0xffffffff */ };
 typedef DAQCommand& DAQCommand_out;
 
 _CORBA_GLOBAL_VAR _dyn_attr const ::CORBA::TypeCode_ptr _tc_DAQCommand;
@@ -208,7 +208,7 @@ typedef DAQDone& DAQDone_out;
 
 _CORBA_GLOBAL_VAR _dyn_attr const ::CORBA::TypeCode_ptr _tc_DAQDone;
 
-enum CompStatus { COMP_WORKING, COMP_FINISHED, COMP_WARNING, COMP_FATAL, COMP_ERRORED, COMP_FIXWAIT /*, __max_CompStatus=0xffffffff */ };
+enum CompStatus { COMP_WORKING, COMP_FINISHED, COMP_WARNING, COMP_FATAL, COMP_RESTART /*, __max_CompStatus=0xffffffff */ };
 typedef CompStatus& CompStatus_out;
 
 _CORBA_GLOBAL_VAR _dyn_attr const ::CORBA::TypeCode_ptr _tc_CompStatus;
@@ -489,7 +489,7 @@ inline void operator >>=(CompStatus _e, cdrStream& s) {
 inline void operator <<= (CompStatus& _e, cdrStream& s) {
   ::CORBA::ULong _0RL_e;
   ::operator<<=(_0RL_e,s);
-  if (_0RL_e <= COMP_FIXWAIT) {
+  if (_0RL_e <= COMP_RESTART) {
     _e = (CompStatus) _0RL_e;
   }
   else {

@@ -42,7 +42,7 @@ static const char* _0RL_enumMember_DAQDone[] = { "UNDONE", "DONE" };
 static CORBA::TypeCode_ptr _0RL_tc_DAQDone = CORBA::TypeCode::PR_enum_tc("IDL:DAQDone:1.0", "DAQDone", _0RL_enumMember_DAQDone, 2, &_0RL_tcTrack);
 const CORBA::TypeCode_ptr _tc_DAQDone = _0RL_tc_DAQDone;
 
-static const char* _0RL_enumMember_CompStatus[] = { "COMP_WORKING", "COMP_FINISHED", "COMP_WARNING", "COMP_FATAL", "COMP_FIXWAIT" };
+static const char* _0RL_enumMember_CompStatus[] = { "COMP_WORKING", "COMP_FINISHED", "COMP_WARNING", "COMP_FATAL", "COMP_RESTART" };
 static CORBA::TypeCode_ptr _0RL_tc_CompStatus = CORBA::TypeCode::PR_enum_tc("IDL:CompStatus:1.0", "CompStatus", _0RL_enumMember_CompStatus, 5, &_0RL_tcTrack);
 const CORBA::TypeCode_ptr _tc_CompStatus = _0RL_tc_CompStatus;
 

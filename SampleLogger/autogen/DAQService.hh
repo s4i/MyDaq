@@ -198,7 +198,7 @@ typedef DAQLifeCycleState& DAQLifeCycleState_out;
 
 _CORBA_GLOBAL_VAR _dyn_attr const ::CORBA::TypeCode_ptr _tc_DAQLifeCycleState;
 
-enum DAQCommand { CMD_CONFIGURE, CMD_START, CMD_STOP, CMD_UNCONFIGURE, CMD_PAUSE, CMD_RESUME, CMD_ERRORED, CMD_NOP /*, __max_DAQCommand=0xffffffff */ };
+enum DAQCommand { CMD_CONFIGURE, CMD_START, CMD_STOP, CMD_UNCONFIGURE, CMD_PAUSE, CMD_RESUME, CMD_RESTART, CMD_NOP /*, __max_DAQCommand=0xffffffff */ };
 typedef DAQCommand& DAQCommand_out;
 
 _CORBA_GLOBAL_VAR _dyn_attr const ::CORBA::TypeCode_ptr _tc_DAQCommand;

@@ -44,7 +44,6 @@ private:
     int daq_stop();
     int daq_pause();
     int daq_resume();
-    int daq_errored();
 
     int parse_params(::NVList* list);
     int read_data_from_detectors();

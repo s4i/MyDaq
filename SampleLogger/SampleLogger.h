@@ -48,7 +48,6 @@ private:
     int daq_stop();
     int daq_pause();
     int daq_resume();
-    int daq_errored();
 
     int parse_params(::NVList* list);
     int reset_InPort();
@@ -61,6 +60,8 @@ private:
     unsigned int m_maxFileSizeInMByte;
     BufferStatus m_in_status;
     int m_update_rate;
+
+    bool error_flag;
     bool m_debug;
 };
 

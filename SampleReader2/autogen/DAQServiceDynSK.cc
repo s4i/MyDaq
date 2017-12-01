@@ -34,7 +34,7 @@ static const char* _0RL_enumMember_DAQLifeCycleState[] = { "LOADED", "CONFIGURED
 static CORBA::TypeCode_ptr _0RL_tc_DAQLifeCycleState = CORBA::TypeCode::PR_enum_tc("IDL:DAQLifeCycleState:1.0", "DAQLifeCycleState", _0RL_enumMember_DAQLifeCycleState, 5, &_0RL_tcTrack);
 const CORBA::TypeCode_ptr _tc_DAQLifeCycleState = _0RL_tc_DAQLifeCycleState;
 
-static const char* _0RL_enumMember_DAQCommand[] = { "CMD_CONFIGURE", "CMD_START", "CMD_STOP", "CMD_UNCONFIGURE", "CMD_PAUSE", "CMD_RESUME", "CMD_ERRORED", "CMD_NOP" };
+static const char* _0RL_enumMember_DAQCommand[] = { "CMD_CONFIGURE", "CMD_START", "CMD_STOP", "CMD_UNCONFIGURE", "CMD_PAUSE", "CMD_RESUME", "CMD_RESTART", "CMD_NOP" };
 static CORBA::TypeCode_ptr _0RL_tc_DAQCommand = CORBA::TypeCode::PR_enum_tc("IDL:DAQCommand:1.0", "DAQCommand", _0RL_enumMember_DAQCommand, 8, &_0RL_tcTrack);
 const CORBA::TypeCode_ptr _tc_DAQCommand = _0RL_tc_DAQCommand;
 

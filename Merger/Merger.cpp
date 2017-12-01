@@ -111,7 +111,6 @@ int Merger::daq_dummy()
     return 0;
 }
 
-
 /**
  * @brief configureが実行された場合の処理. 
  *
@@ -238,13 +237,6 @@ int Merger::daq_pause()
 int Merger::daq_resume()
 {
     std::cerr << "*** Merger::resume" << std::endl;
-
-    return 0;
-}
-
-int Merger::daq_errored()
-{
-    std::cerr << "*** Merger::errored" << std::endl;
 
     return 0;
 }

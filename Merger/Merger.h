@@ -37,7 +37,7 @@ public:
     virtual RTC::ReturnCode_t onExecute(RTC::UniqueId ec_id);
 
 private:
-    static const int InPortNum = 3;                 //!< インポート数
+    static const int InPortNum = 2;                 //!< インポート数
     InPort<TimedOctetSeq>  *m_InPort[InPortNum];    //!< インポート
     TimedOctetSeq          *m_in_data[InPortNum];   //!< 各インポートがリードしたデータのバッファ
     
@@ -55,7 +55,7 @@ private:
     int daq_stop();
     int daq_pause();
     int daq_resume();
-    int daq_errored();
+    
     int parse_params(::NVList* list);
     int reset_InPort();
     unsigned int read_InPort(int PortNum);

@@ -1,2 +1,0 @@
-# MyDaq
-# DAQ Component xml

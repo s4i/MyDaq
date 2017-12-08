@@ -6,9 +6,9 @@ SRCS += $(COMP_NAME).cpp
 SRCS += $(COMP_NAME)Comp.cpp
 
 # Socket library
-LDLIBS += -L$(DAQMW_LIB_DIR) -lSock -I/usr/local/include -L/usr/local/lib \
-			-I/usr/include/python2.7 -L/usr/lib/python2.7/config -lpython2.7
-CXXFLAGS += -I/usr/include/python2.7 -L/usr/lib/python2.7/config -lpython2.7
+LDLIBS += -L$(DAQMW_LIB_DIR) -lSock -I/usr/local/include -L/usr/local/lib -g \
+			-I/usr/include/python3.5m -L/usr/lib/python3.5/config -lpython3.5m
+CXXFLAGS += -I/usr/include/python3.5m -L/usr/lib/python3.5/config -lpython3.5m
 
 # sample install target
 #

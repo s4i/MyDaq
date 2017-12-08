@@ -93,8 +93,8 @@ int SampleLogger::parse_params(::NVList* list)
 {
     int ret = 0;
 
-    bool isExistParamLogging = false;
-    bool isExistParamDirName = false;
+    //bool isExistParamLogging = false;
+    //bool isExistParamDirName = false;
 
     int length = (*list).length();
     for (int i = 0; i < length; i += 2) {
@@ -112,16 +112,16 @@ int SampleLogger::parse_params(::NVList* list)
         }
         if (sname == "isLogging") {
             toLower(svalue); // all characters of cvale are converted to lower.
-            isExistParamLogging = true;
+            //bool isExistParamLogging = true;
             if (svalue == "yes") {
                 m_isDataLogging = true;
                 fileUtils = new FileUtils();
-                isExistParamLogging = true;
+                //isExistParamLogging = true;
                 std::cerr << "SampleLogger: Save to file: true\n";
             }
             else if (svalue == "no") {
                 m_isDataLogging = false;
-                isExistParamLogging = true;
+                //isExistParamLogging = true;
                 std::cerr << "SampleLogger: Save to file: false\n";
             }
         }
@@ -144,7 +144,7 @@ int SampleLogger::parse_params(::NVList* list)
             std::string svalue = (std::string)(*list)[i + 1].value;
 
             if (sname == "dirName") {
-                isExistParamDirName = true;
+                //bool isExistParamDirName = true;
                 m_dirName = svalue;
                 if (m_isDataLogging) {
                     std::cerr << "Dir name for data saving:"
@@ -281,8 +281,10 @@ int SampleLogger::daq_run()
         int block_byte_size = m_in_data.data.length();
         
         // データ読み込み
-        memcpy(&mm_data, &m_in_data.data[HEADER_BYTE_SIZE], 32); 
-	    std::cerr << mm_data << std::endl; // 表示
+        memcpy(&m_data, &m_in_data.data[HEADER_BYTE_SIZE], 50); 
+        
+        // データ表示
+	    std::cerr << m_data << std::endl; 
 
         event_byte_size =
             block_byte_size - HEADER_BYTE_SIZE - FOOTER_BYTE_SIZE;

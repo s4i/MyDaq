@@ -63,8 +63,7 @@ private:
     static const int SEND_BUFFER_SIZE = 50; //
 
     unsigned char s_data[SEND_BUFFER_SIZE];
-    unsigned char m_data[SEND_BUFFER_SIZE];
-    char mm_data[SEND_BUFFER_SIZE];
+    char m_data[SEND_BUFFER_SIZE];
     size_t m_recv_byte_size;
 
     BufferStatus m_out_status;

@@ -18,8 +18,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <wiringPi.h>
-#include <wiringSerial.h>
+#include <Python.h>
+//#include <wiringPi.h>
+//#include <wiringSerial.h>
 ////
 using namespace RTC;
 
@@ -63,8 +64,7 @@ private:
     static const int SEND_BUFFER_SIZE = 50; //
 
     unsigned char s_data[SEND_BUFFER_SIZE];
-    unsigned char m_data[SEND_BUFFER_SIZE];
-    char mm_data[SEND_BUFFER_SIZE];
+    char m_data[SEND_BUFFER_SIZE];
     size_t m_recv_byte_size;
 
     BufferStatus m_out_status;
@@ -72,41 +72,15 @@ private:
     int m_srcPort;                        /// Port No. of data server
     std::string m_srcAddr;                /// IP addr. of data server
 	
-    const std::string MY_MODULE = "device_pi2";
-	const std::string MY_FUNC1 = "ready";
-	const std::string MY_FUNC2 = "w1";
 	char *w1_dir = nullptr, *ret = nullptr;
+	
+	// Python.h
+	PyObject *pName, *pModule = nullptr, *pFunc, *pFunc2;
+	PyObject *pArgs, *pValue, *pValue2;
+	Py_ssize_t pylen;
     
     bool m_debug;
 };
-
-class ArgumentCatcher
-	: TempReader
-{
-public:
-	ArgumentCatcher();
-	~ArgumentCatcher();
-	int GetArgument(int *cnt = nullptr, char **vec = nullptr);
-	int* ReturnArgCounter();
-	char** ReturnArgVector();
-private:
-	int *arg_counter_ptr;
-	char **arg_vector_ptr;	
-};
-
-int ArgumentCatcher::GetArgument(int *cnt, char **vec) {
-	arg_counter_ptr = cnt;
-	arg_vector_ptr = vec;
-	return 0;
-}
-
-int* ArgumentCatcher::ReturnArgCounter() {
-	return arg_counter_ptr;
-}
-
-char** ArgumentCatcher::ReturnArgVector() {
-	return arg_vector_ptr;
-}
 
 extern "C"
 {

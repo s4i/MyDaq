@@ -61,7 +61,8 @@ private:
     BufferStatus m_in_status;
     int m_update_rate;
     bool m_debug;
-    char mm_data[32];
+    
+    char m_data[50];
 };
 
 extern "C"

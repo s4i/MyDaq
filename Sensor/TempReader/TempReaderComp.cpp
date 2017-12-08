@@ -67,15 +67,8 @@ void MyModuleInit(RTC::Manager* manager)
     return;
 }
 
-void arg_catcher(int *cnt, char **vec) {
-	ArgCounter_ptr = cnt;
-	ArgVector_ptr = vec;
-}
-
 int main (int argc, char** argv)
 {
-	arg_catcher(&argc, argv);
-	
     RTC::Manager* manager;
     manager = RTC::Manager::init(argc, argv);
 

@@ -155,7 +155,7 @@ int AccelReader::set_data(size_t data_byte_size)
     ///set OutPort buffer length
     m_out_data.data.length(data_byte_size + HEADER_BYTE_SIZE + FOOTER_BYTE_SIZE);
     memcpy(&(m_out_data.data[0]), &header[0], HEADER_BYTE_SIZE);
-    memcpy(&(m_out_data.data[HEADER_BYTE_SIZE]), &mm_data[0], data_byte_size);
+    memcpy(&(m_out_data.data[HEADER_BYTE_SIZE]), &m_data[0], data_byte_size);
     memcpy(&(m_out_data.data[HEADER_BYTE_SIZE + data_byte_size]), &footer[0], FOOTER_BYTE_SIZE);
 
     return 0;
@@ -209,9 +209,9 @@ int AccelReader::daq_run()
 		delay(50);
 
 
-		sprintf(mm_data, "%s", m_data);
-		//std::cerr << mm_data << std::endl;
-		m_recv_byte_size = sizeof(mm_data);
+		sprintf(m_data, "%s", m_data);
+		//std::cerr << m_data << std::endl;
+		m_recv_byte_size = sizeof(m_data);
 		set_data(m_recv_byte_size); // set data to OutPort Buffer
     }
 

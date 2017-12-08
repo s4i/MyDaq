@@ -8,17 +8,15 @@
  */
 
 #include "TempReader.h"
-#include <Python.h>
 
 using DAQMW::FatalType::DATAPATH_DISCONNECTED;
 using DAQMW::FatalType::OUTPORT_ERROR;
 using DAQMW::FatalType::USER_DEFINED_ERROR1;
 using DAQMW::FatalType::USER_DEFINED_ERROR2;
 
-// Python.h
-PyObject *pName, *pModule, *pFunc, *pFunc2;
-PyObject *pArgs, *pValue, *pValue2;
-PyObject* sysPath, *dir;
+const char MY_MODULE[] = "device";
+const char MY_FUNC1[] = "ready";
+const char MY_FUNC2[] = "w1";
 
 // Module specification
 // Change following items to suit your component's spec.
@@ -76,6 +74,56 @@ int TempReader::daq_dummy(){ return 0; }
 int TempReader::daq_configure()
 {
     std::cerr << "*** TempReader::configure" << std::endl;
+    
+    if (pModule == nullptr) {
+		Py_Initialize();
+		PyObject* sysPath = PySys_GetObject("path");
+		PyObject* dir = PyUnicode_DecodeFSDefault("*");
+		PyList_Append(sysPath, dir); 
+		/****************************************************************/
+		
+		pName = PyUnicode_DecodeFSDefault(MY_MODULE);
+		pModule = PyImport_Import(pName);
+		Py_DECREF(pName);
+		if (pModule != nullptr) {
+			// Func1
+			pFunc = PyObject_GetAttrString(pModule, MY_FUNC1);
+			if (pFunc && PyCallable_Check(pFunc)) {
+				pValue = PyObject_CallObject(pFunc, NULL);
+				if (pValue != NULL) {
+				// def 実行
+				pValue = PyObject_CallObject(pFunc, nullptr);
+					if (pValue != nullptr) {
+						//w1_dir = PyString_AsString(pValue); // Python2.7
+						
+						/*** Python 3.5 */
+						w1_dir = PyUnicode_AsUTF8(pValue);
+						Py_DECREF(pValue);
+					}
+					else {
+						Py_DECREF(pFunc);
+						Py_DECREF(pModule);
+						PyErr_Print();
+						std::cerr << "Call failed" << std::endl;
+						return 1;
+					}
+				}
+			}
+			else {
+				if (PyErr_Occurred())
+					PyErr_Print();
+				std::cerr << "Cannot find function: " << MY_FUNC1 << std::endl;
+				return 1;
+			}
+			//w1_slave dir path
+			std::cerr << w1_dir << std::endl;
+		}
+		else {
+			PyErr_Print();
+			std::cerr << "Failed to load: " << MY_MODULE << std::endl;
+			return 1;
+		}
+	}
 
     return 0;
 }
@@ -94,79 +142,32 @@ int TempReader::daq_start()
     std::cerr << "*** TempReader::start" << std::endl;
 
     m_out_status = BUF_SUCCESS;
-
-    try {
-		Py_Initialize();
-        /** Python2.7 PYTHONPATH 未設定時のカレントディレクトリ捕捉 */
-		PyObject *sys = PyImport_ImportModule("sys");
-		PyObject *path = PyObject_GetAttrString(sys, "path");
-		PyList_Append(path, PyString_FromString("."));
-		PySys_SetArgv(*ArgCounter_ptr, ArgVector_ptr); // Python2.7
-		//char word[] = "path";
-		//sysPath = PySys_GetObject(word);
-		//dir = PyString_FromString(".");
-		//PyList_Append(sysPath, dir);
-		pName = PyString_FromString(MY_MODULE.c_str()); 
-		
-		// Python Module<(*:module).py> set
-		pModule = PyImport_Import(pName);
-		Py_DECREF(pName);
-		if (pModule != NULL) {
-			// Func1
-			pFunc = PyObject_GetAttrString(pModule, MY_FUNC1.c_str());
-			if (pFunc && PyCallable_Check(pFunc)) {
-				// def 実行
-				pValue = PyObject_CallObject(pFunc, NULL);
-				if (pValue != NULL) {
-					w1_dir = PyString_AsString(pValue); // Python2.7
-					//pStr = PyUnicode_AsUTF8String(pValue);
-					//w1_dir = PyUnicode_AsUTF8AndSize(pStr, &psize);
-
-					Py_DECREF(pValue);
-				}
-				else {
-					Py_DECREF(pFunc);
-					Py_DECREF(pModule);
-					PyErr_Print();
-					fprintf(stderr,"Call failed\n");
-					return 1;
-				}
-			}
-			else {
-				if (PyErr_Occurred())
-					PyErr_Print();
-				fprintf(stderr, "Cannot find function \"%s\"\n", MY_FUNC1.c_str());
-			}
+	
+	if (w1_dir != nullptr) {
+		// Func2
+		pFunc2 = PyObject_GetAttrString(pModule, MY_FUNC2);
+		if (pFunc2 && PyCallable_Check(pFunc2)) {
+			pArgs = PyTuple_New(1); // 引数は1
 			
-			std::cerr << w1_dir << std::endl; //w1_slave dir path
+			//PyTuple_SetItem(pArgs, 0, PyString_FromString(w1_dir)); // Python2.7
 			
-			// Func2
-			pFunc2 = PyObject_GetAttrString(pModule, MY_FUNC2.c_str());    
-			if (pFunc2 && PyCallable_Check(pFunc)) {
-				pArgs = PyTuple_New(1); // 引数は1
-				// ready 関数実行
-				PyTuple_SetItem(pArgs, 0, PyString_FromString(w1_dir)); // Python2.7
-
-			}
-			else {
-				if (PyErr_Occurred())
-					PyErr_Print();
-				fprintf(stderr, "Cannot find function \"%s\"\n", MY_FUNC2.c_str());
-			}
+			pValue2 = PyUnicode_FromString(w1_dir);
+			//if (!pValue2) {
+				//Py_DECREF(pArgs);
+				//Py_DECREF(pModule);
+				//std::cerr << "Cannot convert argument" << std::endl;
+				//return 1;
+			//}
+			PyTuple_SetItem(pArgs, 0, pValue2); 
 		}
 		else {
-			PyErr_Print();
-			fprintf(stderr, "Failed to load \"%s\"\n", MY_MODULE.c_str());
+			if (PyErr_Occurred())
+				PyErr_Print();
+			std::cerr << "Cannot find function " << MY_FUNC2 << std::endl;
 			return 1;
 		}
-    } catch (int e) {
-        std::cerr << "Sock Fatal Error : File descriptor" << std::endl;
-        fatal_error_report(USER_DEFINED_ERROR1, "Serial port open failed");
-    } catch (...) {
-        std::cerr << "Sock Fatal Error : Unknown" << std::endl;
-        fatal_error_report(USER_DEFINED_ERROR1, "Unknown error");
-    }
-
+	}
+	
     // Check data port connections
     bool outport_conn = check_dataPort_connections( m_OutPort );
     if (!outport_conn) {
@@ -179,12 +180,13 @@ int TempReader::daq_start()
 
 int TempReader::daq_stop()
 {
+	Py_DECREF(pValue2);
 	Py_DECREF(pArgs); 
 	Py_DECREF(pFunc);
     Py_XDECREF(pFunc2);
     Py_DECREF(pModule);
     Py_Finalize(); // python 終了
-
+    
     std::cerr << "*** TempReader::stop" << std::endl;
 
     return 0;
@@ -215,7 +217,7 @@ int TempReader::set_data(size_t data_byte_size)
     ///set OutPort buffer length
     m_out_data.data.length(data_byte_size + HEADER_BYTE_SIZE + FOOTER_BYTE_SIZE);
     memcpy(&(m_out_data.data[0]), &header[0], HEADER_BYTE_SIZE);
-    memcpy(&(m_out_data.data[HEADER_BYTE_SIZE]), &mm_data[0], data_byte_size);
+    memcpy(&(m_out_data.data[HEADER_BYTE_SIZE]), &m_data[0], data_byte_size);
     memcpy(&(m_out_data.data[HEADER_BYTE_SIZE + data_byte_size]), &footer[0], FOOTER_BYTE_SIZE);
 
     return 0;
@@ -257,27 +259,19 @@ int TempReader::daq_run()
     if (m_out_status == BUF_SUCCESS) {
 		// w1 関数実行
 		pValue2 = PyObject_CallObject(pFunc2, pArgs);
-		if (pValue2 != NULL) {
-			ret = PyString_AsString(pValue2); // Python2.7
+		if (pValue2 != nullptr) {
+			/** Python 2.7 */
+			//ret = PyString_AsString(pValue2); // Python2.7
 			
-			/*** python3.5 */
-			//pStr2 = PyUnicode_AsUTF8String(pValue2);
-			//ret = PyUnicode_AsUTF8AndSize(pStr2, &psize);
+			/*** Python3.5 */
+			ret = PyUnicode_AsUTF8AndSize(pValue2, &pylen);
+			sleep(1);
 			
-			Py_DECREF(pValue2);
-		}
-		else {
-			Py_DECREF(pFunc2);
-			Py_DECREF(pModule);
-			PyErr_Print();
-			fprintf(stderr,"Call failed\n");
-			return 1;
-		}
-		
-		sprintf(mm_data, "気温(度): %s", ret);
-		std::cerr << mm_data << std::endl;
-		m_recv_byte_size = sizeof(mm_data);
-		set_data(m_recv_byte_size); // set data to OutPort Buffer
+			sprintf(m_data, "気温(度): %s", ret);
+			std::cerr << m_data << std::endl;
+			m_recv_byte_size = sizeof(m_data);
+			set_data(m_recv_byte_size); // set data to OutPort Buffer
+		}	
     }
 
     if (write_OutPort() < 0) {

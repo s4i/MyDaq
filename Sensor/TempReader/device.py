@@ -11,33 +11,17 @@ def ready():
     return device_file
 
 
-def w1(device_file):
+def w1(df):
     cat = subprocess.Popen(
-        ['cat', device_file],
+        ['cat', df],
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE)
     out, err = cat.communicate()
     out_decode = out.decode('utf-8')
     lines = out_decode.split('\n')
-    while lines[0].strip()[-3:] != 'YES':
-        time.sleep(0.2)
-        cat = subprocess.Popen(
-            ['cat', device_file],
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE)
-        out, err = cat.communicate()
-        out_decode = out.decode('utf-8')
-        lines = out_decode.split('\n')
     equals_pos = lines[1].find('t=')
     if (equals_pos != -1):
         temp_string = lines[1][equals_pos + 2:]
         temp_c = float(temp_string) / 1000.0
-        ret = str(temp_c)
-        return ret
-
-
-if __name__ == '__main__':
-    a = ready()
-    while True:
-        b = w1(a)
-        print(b)
+        temp = str(temp_c)
+        return temp

@@ -20,3 +20,14 @@ CXXFLAGS += -I/usr/include/python3.5m -L/usr/lib/python3.5/config -lpython3.5m
 #	install -m $(MODE) $(COMP_NAME)Comp $(BINDIR)
 
 include /usr/share/daqmw/mk/comp.mk
+
+clean:
+	@rm -f $(wildcard *.o) $(COMP_NAME)Comp.o $(COMP_NAME)Comp
+	@rm -f *Skel.h *Skel.cpp
+	@rm -f *Stub.h *Stub.cpp
+	@rm -f *~
+	@rm -f DAQService.hh DAQServiceDynSK.cc DAQServiceSK.cc
+	@rm -f DAQService.idl
+	@rm -f symlink
+	@rm -fr $(AUTO_GEN_DIR) .depend
+	@rm -fr __pycache__

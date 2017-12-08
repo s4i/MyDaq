@@ -77,26 +77,24 @@ int TempReader::daq_configure()
     
     if (pModule == nullptr) {
 		Py_Initialize();
-		//PyObject* sysPath = PySys_GetObject("path");
-		//PyObject* dir = PyUnicode_DecodeFSDefault(".");
-		//PyList_Append(sysPath, dir); 
+		
+		/*** PYTHONPATH ***********************************/
+		PyObject* sys = PyImport_ImportModule("sys");
+		PyObject* sysPath = PyObject_GetAttrString(sys, "path");
+		PyObject* dirPath = PyUnicode_DecodeFSDefault("/home/pi/MyDaq/MyDaq/Sensor/TempReader");
+		PyList_Append(sysPath, dirPath); 
 		/****************************************************************/
 		
 		pName = PyUnicode_DecodeFSDefault(MY_MODULE.c_str());
 		pModule = PyImport_Import(pName);
 		Py_DECREF(pName);
 		if (pModule != nullptr) {
-			// Func1
 			pFunc = PyObject_GetAttrString(pModule, MY_FUNC1.c_str());
 			if (pFunc && PyCallable_Check(pFunc)) {
 				pValue = PyObject_CallObject(pFunc, NULL);
 				if (pValue != NULL) {
-				// def 実行
 				pValue = PyObject_CallObject(pFunc, nullptr);
 					if (pValue != nullptr) {
-						//w1_dir = PyString_AsString(pValue); // Python2.7
-						
-						/*** Python 3.5 */
 						w1_dir = PyUnicode_AsUTF8(pValue);
 						Py_DECREF(pValue);
 					}
@@ -147,17 +145,14 @@ int TempReader::daq_start()
 		// Func2
 		pFunc2 = PyObject_GetAttrString(pModule, MY_FUNC2.c_str());
 		if (pFunc2 && PyCallable_Check(pFunc2)) {
-			pArgs = PyTuple_New(1); // 引数は1
-			
-			//PyTuple_SetItem(pArgs, 0, PyString_FromString(w1_dir)); // Python2.7
-			
+			pArgs = PyTuple_New(1); // 引数は1つ
 			pValue2 = PyUnicode_FromString(w1_dir);
-			//if (!pValue2) {
-				//Py_DECREF(pArgs);
-				//Py_DECREF(pModule);
-				//std::cerr << "Cannot convert argument" << std::endl;
-				//return 1;
-			//}
+			if (!pValue2) {
+				Py_DECREF(pArgs);
+				Py_DECREF(pModule);
+				std::cerr << "Cannot convert argument" << std::endl;
+				return 1;
+			}
 			PyTuple_SetItem(pArgs, 0, pValue2); 
 		}
 		else {
@@ -257,21 +252,15 @@ int TempReader::daq_run()
     }
 
     if (m_out_status == BUF_SUCCESS) {
-		// w1 関数実行
 		pValue2 = PyObject_CallObject(pFunc2, pArgs);
 		if (pValue2 != nullptr) {
-			/** Python 2.7 */
-			//ret = PyString_AsString(pValue2); // Python2.7
-			
-			/*** Python3.5 */
 			ret = PyUnicode_AsUTF8AndSize(pValue2, &pylen);
-			sleep(1);
-			
-			sprintf(m_data, "気温(度): %s", ret);
+			sprintf(m_data, "気温(度): %6s", ret);
 			std::cerr << m_data << std::endl;
 			m_recv_byte_size = sizeof(m_data);
 			set_data(m_recv_byte_size); // set data to OutPort Buffer
-		}	
+			sleep(1);
+		}
     }
 
     if (write_OutPort() < 0) {
@@ -283,7 +272,6 @@ int TempReader::daq_run()
     }
     return 0;
 }
-
 
 extern "C"
 {

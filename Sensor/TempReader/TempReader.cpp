@@ -14,9 +14,9 @@ using DAQMW::FatalType::OUTPORT_ERROR;
 using DAQMW::FatalType::USER_DEFINED_ERROR1;
 using DAQMW::FatalType::USER_DEFINED_ERROR2;
 
-const char MY_MODULE[] = "device";
-const char MY_FUNC1[] = "ready";
-const char MY_FUNC2[] = "w1";
+const std::string MY_MODULE = "device";
+const std::string MY_FUNC1 = "ready";
+const std::string MY_FUNC2 = "w1";
 
 // Module specification
 // Change following items to suit your component's spec.
@@ -77,17 +77,17 @@ int TempReader::daq_configure()
     
     if (pModule == nullptr) {
 		Py_Initialize();
-		PyObject* sysPath = PySys_GetObject("path");
-		PyObject* dir = PyUnicode_DecodeFSDefault("*");
-		PyList_Append(sysPath, dir); 
+		//PyObject* sysPath = PySys_GetObject("path");
+		//PyObject* dir = PyUnicode_DecodeFSDefault(".");
+		//PyList_Append(sysPath, dir); 
 		/****************************************************************/
 		
-		pName = PyUnicode_DecodeFSDefault(MY_MODULE);
+		pName = PyUnicode_DecodeFSDefault(MY_MODULE.c_str());
 		pModule = PyImport_Import(pName);
 		Py_DECREF(pName);
 		if (pModule != nullptr) {
 			// Func1
-			pFunc = PyObject_GetAttrString(pModule, MY_FUNC1);
+			pFunc = PyObject_GetAttrString(pModule, MY_FUNC1.c_str());
 			if (pFunc && PyCallable_Check(pFunc)) {
 				pValue = PyObject_CallObject(pFunc, NULL);
 				if (pValue != NULL) {
@@ -145,7 +145,7 @@ int TempReader::daq_start()
 	
 	if (w1_dir != nullptr) {
 		// Func2
-		pFunc2 = PyObject_GetAttrString(pModule, MY_FUNC2);
+		pFunc2 = PyObject_GetAttrString(pModule, MY_FUNC2.c_str());
 		if (pFunc2 && PyCallable_Check(pFunc2)) {
 			pArgs = PyTuple_New(1); // 引数は1
 			

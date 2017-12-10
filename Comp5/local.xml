@@ -17,7 +17,7 @@
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
                     <instName>SampleReader0.rtc</instName>
-                    <execPath>/home/sai/MyDaq/SampleReader/SampleReaderComp</execPath>
+                    <execPath>./SampleReader/SampleReaderComp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>5</startOrd>
                     <inPorts>
@@ -34,7 +34,7 @@
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
                     <instName>SampleReader20.rtc</instName>
-                    <execPath>/home/sai/MyDaq/SampleReader2/SampleReader2Comp</execPath>
+                    <execPath>./SampleReader2/SampleReader2Comp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>4</startOrd>
                     <inPorts>
@@ -51,7 +51,7 @@
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
                     <instName>SampleReader30.rtc</instName>
-                    <execPath>/home/sai/MyDaq/SampleReader3/SampleReader3Comp</execPath>
+                    <execPath>./SampleReader3/SampleReader3Comp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>3</startOrd>
                     <inPorts>
@@ -68,7 +68,7 @@
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
                     <instName>Merger0.rtc</instName>
-                    <execPath>/home/sai/MyDaq/Merger/MergerComp</execPath>
+                    <execPath>./Merger/MergerComp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>2</startOrd>
                     <inPorts>
@@ -87,7 +87,7 @@
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
                     <instName>SampleLogger0.rtc</instName>
-                    <execPath>/home/sai/MyDaq/SampleLogger/SampleLoggerComp</execPath>
+                    <execPath>./SampleLogger/SampleLoggerComp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>1</startOrd>
                     <inPorts>

@@ -17,6 +17,7 @@ using DAQMW::FatalType::USER_DEFINED_ERROR2;
 const std::string MY_MODULE = "device";
 const std::string MY_FUNC1 = "ready";
 const std::string MY_FUNC2 = "w1";
+const std::string MODULE_PATH = "/home/pi/MyDaq/MyDaq/Sensor/TempReader";
 
 // Module specification
 // Change following items to suit your component's spec.
@@ -81,7 +82,7 @@ int TempReader::daq_configure()
 		/*** PYTHONPATH ***********************************/
 		PyObject* sys = PyImport_ImportModule("sys");
 		PyObject* sysPath = PyObject_GetAttrString(sys, "path");
-		PyObject* dirPath = PyUnicode_DecodeFSDefault("/home/pi/MyDaq/MyDaq/Sensor/TempReader");
+		PyObject* dirPath = PyUnicode_DecodeFSDefault(MODULE_PATH.c_str());
 		PyList_Append(sysPath, dirPath); 
 		/****************************************************************/
 		

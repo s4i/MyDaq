@@ -25,3 +25,11 @@ def w1(df):
         temp_c = float(temp_string) / 1000.0
         temp = str(temp_c)
         return temp
+
+
+if __name__ == '__main__':
+    dir_path = ready()
+    while True:
+        data = w1(dir_path)
+        print(data)
+        time.sleep(0.2)

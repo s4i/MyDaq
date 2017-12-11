@@ -17,7 +17,7 @@ using DAQMW::FatalType::USER_DEFINED_ERROR2;
 const std::string MY_MODULE = "device";
 const std::string MY_FUNC1 = "ready";
 const std::string MY_FUNC2 = "w1";
-const std::string MODULE_PATH = "/home/pi/MyDaq/MyDaq/Sensor/TempReader";
+const std::string MODULE_PATH = "/home/pi/MyDaq/Sensor/TempReader";
 
 // Module specification
 // Change following items to suit your component's spec.
@@ -79,7 +79,7 @@ int TempReader::daq_configure()
     if (pModule == nullptr) {
 		Py_Initialize();
 		
-		/*** PYTHONPATH ***********************************/
+		/*** PYTHONPATH ******************************************/
 		PyObject* sys = PyImport_ImportModule("sys");
 		PyObject* sysPath = PyObject_GetAttrString(sys, "path");
 		PyObject* dirPath = PyUnicode_DecodeFSDefault(MODULE_PATH.c_str());
@@ -92,8 +92,8 @@ int TempReader::daq_configure()
 		if (pModule != nullptr) {
 			pFunc = PyObject_GetAttrString(pModule, MY_FUNC1.c_str());
 			if (pFunc && PyCallable_Check(pFunc)) {
-				pValue = PyObject_CallObject(pFunc, NULL);
-				if (pValue != NULL) {
+				pValue = PyObject_CallObject(pFunc, nullptr);
+				if (pValue != nullptr) {
 				pValue = PyObject_CallObject(pFunc, nullptr);
 					if (pValue != nullptr) {
 						w1_dir = PyUnicode_AsUTF8(pValue);

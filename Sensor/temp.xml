@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!-- DON'T REMOVE THE ABOVE LINE.                                     -->
+<!-- DON'T PUT ANY LINES ABOVE THE 1ST LINE.                          -->
+<!-- Sample config.xml to run SampleReader and SampleLogger.         -->
+<!-- Please rewrite execPath (2 places), confFile (2 places) suitable -->
+<!-- for your directory structure.                                    -->
+<!-- run.py will create rtc.conf in /tmp/daqmw/rtc.conf               -->
+<!-- If you use run.py, set confFile as /tmp/daqmw/rtc.conf           -->
+<configInfo>
+    <daqOperator>
+        <hostAddr>127.0.0.1</hostAddr>
+    </daqOperator>
+    <daqGroups>
+        <daqGroup gid="group0">
+            <components>
+                <component cid="TempReader0">
+                    <hostAddr>127.0.0.1</hostAddr>
+                    <hostPort>50000</hostPort>
+                    <instName>TempReader0.rtc</instName>
+                    <execPath>./TempReader/TempReaderComp</execPath>
+                    <confFile>/tmp/daqmw/rtc.conf</confFile>
+                    <startOrd>2</startOrd>
+                    <inPorts>
+                    </inPorts>
+                    <outPorts>
+                        <outPort>tempreader_out</outPort>
+                    </outPorts>
+                    <params>
+                        <!--param pid="srcAddr">127.0.0.1</param>
+                        <param pid="srcPort">2222</param-->
+                     </params>
+                </component>
+                <component cid="SampleLogger0">
+                    <hostAddr>127.0.0.1</hostAddr>
+                    <hostPort>50000</hostPort>
+                    <instName>SampleLogger0.rtc</instName>
+                    <execPath>./SampleLogger/SampleLoggerComp</execPath>
+                    <confFile>/tmp/daqmw/rtc.conf</confFile>
+                    <startOrd>1</startOrd>
+                    <inPorts>
+                        <inPort from="TempReader0:tempreader_out">samplelogger_in</inPort>
+                    </inPorts>
+                    <outPorts>
+                    </outPorts>
+                    <params>
+                    </params>
+                </component>
+            </components>
+        </daqGroup>
+    </daqGroups>
+</configInfo>

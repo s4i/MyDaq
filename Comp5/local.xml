@@ -19,7 +19,7 @@
                     <instName>SampleReader0.rtc</instName>
                     <execPath>./SampleReader/SampleReaderComp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
-                    <startOrd>4</startOrd>
+                    <startOrd>5</startOrd>
                     <inPorts>
                     </inPorts>
                     <outPorts>
@@ -35,28 +35,8 @@
                     <hostPort>50000</hostPort>
                     <instName>SampleReader20.rtc</instName>
                     <execPath>./SampleReader2/SampleReader2Comp</execPath>
-<<<<<<< HEAD:local.xml
-=======
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>4</startOrd>
-                    <inPorts>
-                    </inPorts>
-                    <outPorts>
-                        <outPort>samplereader_out2</outPort>
-                    </outPorts>
-                    <params>
-                        <param pid="srcAddr">127.0.0.1</param>
-                        <param pid="srcPort">2220</param>
-                    </params>
-                </component>
-                <component cid="SampleReader30">
-                    <hostAddr>127.0.0.1</hostAddr>
-                    <hostPort>50000</hostPort>
-                    <instName>SampleReader30.rtc</instName>
-                    <execPath>./SampleReader3/SampleReader3Comp</execPath>
->>>>>>> 63e84caa1b4328efa9522c61db2fc194cd4fb747:Comp5/local.xml
-                    <confFile>/tmp/daqmw/rtc.conf</confFile>
-                    <startOrd>3</startOrd>
                     <inPorts>
                     </inPorts>
                     <outPorts>
@@ -67,6 +47,25 @@
                         <param pid="srcPort">2221</param>
                     </params>
                 </component>
+<!--
+                <component cid="SampleReader30">
+                    <hostAddr>127.0.0.1</hostAddr>
+                    <hostPort>50000</hostPort>
+                    <instName>SampleReader30.rtc</instName>
+                    <execPath>./SampleReader3/SampleReader3Comp</execPath>
+                    <confFile>/tmp/daqmw/rtc.conf</confFile>
+                    <startOrd>3</startOrd>
+                    <inPorts>
+                    </inPorts>
+                    <outPorts>
+                        <outPort>samplereader_out3</outPort>
+                    </outPorts>
+                    <params>
+                        <param pid="srcAddr">127.0.0.1</param>
+                        <param pid="srcPort">2222</param>
+                    </params>
+                </component>
+-->
                 <component cid="Merger0">
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
@@ -77,6 +76,9 @@
                     <inPorts>
                         <inPort from="SampleReader0:samplereader_out" >collector_in0</inPort>
                         <inPort from="SampleReader20:samplereader_out2">collector_in1</inPort>
+<!--
+                        <inPort from="SampleReader30:samplereader_out3">collector_in2</inPort>
+-->
                     </inPorts>
                     <outPorts>
                         <outPort>e16merger_out</outPort>

@@ -4,7 +4,7 @@
 set -e
 
 # specify original DAQ-Component name
-old_name_camel_case=SampleReader
+old_name_camel_case=SampleReader2
 # specify new DAQ-Component name in Camel (mixed UPPER and lower case)
 new_name_camel_case=SampleReader3
 

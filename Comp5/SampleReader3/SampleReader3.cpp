@@ -67,18 +67,15 @@ RTC::ReturnCode_t SampleReader3::onExecute(RTC::UniqueId ec_id)
     daq_do();
 
     if (error_flag == true) {
-        daq_restart();
+        sleep(5);
+        set_status(COMP_RESTART);
+        error_flag = false;
     }
 
     return RTC::RTC_OK;
 }
 
 int SampleReader3::daq_dummy()
-{
-    return 0;
-}
-
-int SampleReader3::daq_errored()
 {
     return 0;
 }
@@ -197,31 +194,6 @@ int SampleReader3::daq_resume()
 {
     std::cerr << "*** SampleReader3::resume" << std::endl;
 
-    return 0;
-}
-
-int SampleReader3::daq_restart()
-{
-    std::cerr << "*** SampleReader3::restart" << std::endl;
-
-    /* Recovery identification start */
-    // do {
-    //     if (m_sock) {
-    //         m_sock->disconnect();
-    //         delete m_sock;
-    //         m_sock = 0;
-    //         std::cerr << "*** Disconnect socket" << std::endl;
-    //     }
-
-    //     // Create socket and connect to data server.
-    //     m_sock = new DAQMW::Sock();
-    //     m_sock->connect(m_srcAddr, m_srcPort);
-    // } while (m_sock == 0); // 0:Success(Sock.h)
-    // std::cerr << "*** Create socket success" << std::endl;
-    
-    /* Recovery identification end */
-    std::cerr << "*** Reboot request => To Operator" << std::endl;
-    // error_flag = false;
     return 0;
 }
 

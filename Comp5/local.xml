@@ -47,7 +47,6 @@
                         <param pid="srcPort">2221</param>
                     </params>
                 </component>
-<!--
                 <component cid="SampleReader30">
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
@@ -65,7 +64,6 @@
                         <param pid="srcPort">2222</param>
                     </params>
                 </component>
--->
                 <component cid="Merger0">
                     <hostAddr>127.0.0.1</hostAddr>
                     <hostPort>50000</hostPort>
@@ -76,9 +74,7 @@
                     <inPorts>
                         <inPort from="SampleReader0:samplereader_out" >collector_in0</inPort>
                         <inPort from="SampleReader20:samplereader_out2">collector_in1</inPort>
-<!--
                         <inPort from="SampleReader30:samplereader_out3">collector_in2</inPort>
--->
                     </inPorts>
                     <outPorts>
                         <outPort>e16merger_out</outPort>

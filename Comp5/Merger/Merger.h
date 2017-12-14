@@ -37,10 +37,10 @@ public:
     virtual RTC::ReturnCode_t onExecute(RTC::UniqueId ec_id);
 
 private:
-    static const int InPortNum = 2;                 //!< インポート数
+    static const int InPortNum = 3;                 //!< インポート数
     InPort<TimedOctetSeq>  *m_InPort[InPortNum];    //!< インポート
     TimedOctetSeq          *m_in_data[InPortNum];   //!< 各インポートがリードしたデータのバッファ
-    
+
     OutPort<TimedOctetSeq> m_OutPort;               //!< アウトポート
     TimedOctetSeq          m_out_data;              //!< アウトポートのデータのバッファ
 
@@ -55,7 +55,7 @@ private:
     int daq_stop();
     int daq_pause();
     int daq_resume();
-    
+
     int parse_params(::NVList* list);
     int reset_InPort();
     unsigned int read_InPort(int PortNum);
@@ -69,19 +69,19 @@ private:
     static const unsigned int EVENTSIZE_BUFFER_SIZE = 4;
 
     /** @brief 各インポートのデータリードの結果. 成功すれば、BUF_SUCCESS。タイムアウトならば、BUF_TIMEOUT。致命的なエラーが発生したらBUF_FATAL */
-    BufferStatus m_in_status[InPortNum];                    
+    BufferStatus m_in_status[InPortNum];
 
     /** @brief データ送信の結果。成功すれば、BUF_SUCCESS。タイムアウトならば、BUF_TIMEOUT。致命的なエラーが発生したらBUF_FATAL */
     BufferStatus m_out_status;
 
     int m_in_get;                                           //!< リードしたインポートの番号
-    int m_nextread_ID;                                      //!< リードしたインポートの番号.リードできるインポートがない場合、0になる 
-    unsigned int m_recv_byte_size;                          //!< リードしたデータのサイズ 
+    int m_nextread_ID;                                      //!< リードしたインポートの番号.リードできるインポートがない場合、0になる
+    unsigned int m_recv_byte_size;                          //!< リードしたデータのサイズ
     int m_stop_flag;                                        //!< stopが実行されたあとに、daq_runが実行された回数
     bool m_debug;                                           //!<  0--> 通常モード　1-->デバックモード。　コンフィグレーションファイルから設定
-    
-    
-    bool            m_separate_flag;                        //!< 0-->受取ったデータをそのまま送る。1-->イベントごとに送る。コンフィグレーションファイルから設定 
+
+
+    bool            m_separate_flag;                        //!< 0-->受取ったデータをそのまま送る。1-->イベントごとに送る。コンフィグレーションファイルから設定
 
     struct          timeval m_starttime;                    //!< start time  (use for debug)
     struct          timeval m_endtime;                      //!< end time (use for debug)

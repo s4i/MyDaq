@@ -1,10 +1,10 @@
-#!/bin/sh
+!/bin/sh
 
 # exit if error occured.
 set -e
 
 # specify original DAQ-Component name
-old_name_camel_case=SampleReader2
+old_name_camel_case=SampleReader
 # specify new DAQ-Component name in Camel (mixed UPPER and lower case)
 new_name_camel_case=SampleReader3
 

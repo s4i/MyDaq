@@ -19,7 +19,7 @@
                     <instName>SampleReader0.rtc</instName>
                     <execPath>./SampleReader/SampleReaderComp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
-                    <startOrd>5</startOrd>
+                    <startOrd>3</startOrd>
                     <inPorts>
                     </inPorts>
                     <outPorts>
@@ -36,7 +36,7 @@
                     <instName>SampleReader20.rtc</instName>
                     <execPath>./SampleReader2/SampleReader2Comp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
-                    <startOrd>4</startOrd>
+                    <startOrd></startOrd>
                     <inPorts>
                     </inPorts>
                     <outPorts>
@@ -53,7 +53,7 @@
                     <instName>SampleReader30.rtc</instName>
                     <execPath>./SampleReader3/SampleReader3Comp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
-                    <startOrd>3</startOrd>
+                    <startOrd>5</startOrd>
                     <inPorts>
                     </inPorts>
                     <outPorts>

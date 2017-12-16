@@ -68,8 +68,8 @@ RTC::ReturnCode_t SampleReader2::onExecute(RTC::UniqueId ec_id)
 
     if (error_flag == true) {
         sleep(5);
-        set_status(COMP_RESTART);
         error_flag = false;
+        sleep(5);
     }
 
     return RTC::RTC_OK;

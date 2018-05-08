@@ -13,32 +13,30 @@
     <daqGroups>
         <daqGroup gid="group0">
             <components>
-                <component cid="SampleReader0">
+                <component cid="TempReader0">
                     <hostAddr>192.168.0.211</hostAddr>
                     <hostPort>50000</hostPort>
-                    <instName>SampleReader0.rtc</instName>
-                    <execPath>/home/pi/MyDaq/Remote/SampleReader/SampleReaderComp</execPath>
+                    <instName>TempReader0.rtc</instName>
+                    <execPath>/home/pi/MyDaq/Remote/TempReader/TempReaderComp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>2</startOrd>
                     <inPorts>
                     </inPorts>
                     <outPorts>
-                        <outPort>samplereader_out</outPort>
+                        <outPort>tempreader_out</outPort>
                     </outPorts>
                     <params>
-						<param pid="srcAddr">192.168.0.211</param>
-                        <param pid="srcPort">2222</param>
                     </params>
                 </component>
                 <component cid="SampleLogger0">
-                    <hostAddr>192.168.0.210</hostAddr>
+                    <hostAddr>192.168.0.211</hostAddr>
                     <hostPort>50000</hostPort>
                     <instName>SampleLogger0.rtc</instName>
                     <execPath>/home/pi/MyDaq/Remote/SampleLogger/SampleLoggerComp</execPath>
                     <confFile>/tmp/daqmw/rtc.conf</confFile>
                     <startOrd>1</startOrd>
                     <inPorts>
-                        <inPort from="SampleReader0:samplereader_out">samplelogger_in</inPort>
+                        <inPort from="TempReader0:tempreader_out">samplelogger_in</inPort>
                     </inPorts>
                     <outPorts>
                     </outPorts>

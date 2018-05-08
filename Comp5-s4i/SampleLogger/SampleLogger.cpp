@@ -327,7 +327,7 @@ int SampleLogger::daq_run()
             std::cerr << "\033[A\r";
         }
     }
-
+    
     return 0;
 }
 
